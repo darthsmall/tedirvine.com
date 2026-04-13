@@ -13,7 +13,7 @@
 
   :root {
     --black: #130D24;
-    --lime: #fa8406;
+    --lime: #fa8406; /* overridden by JS on load */
     --offwhite: #f0ede6;
     --muted: #7A7488;
     --dim: #2E1D52;
@@ -124,7 +124,7 @@
     font-family: 'Courier New', monospace;
     font-size: 9px;
     line-height: 1.55;
-    color: #fa8406;
+    color: var(--lime);
     opacity: 0.1;
     white-space: pre;
     margin: 0;
@@ -747,6 +747,12 @@
   <meta name="twitter:image" content="https://tedirvine.com/og-image.png">
 </head>
 <body>
+<script>
+  // Pick a random accent color on each load
+  const accents = ['#fa8406', '#C8F135', '#06bbf9', '#e31fea'];
+  const pick = accents[Math.floor(Math.random() * accents.length)];
+  document.documentElement.style.setProperty('--lime', pick);
+</script>
 
 <!-- NAV -->
 <nav>
@@ -991,7 +997,7 @@
     pointer-events: none;
     z-index: 99999;
     font-size: 1rem;
-    color: #fa8406;
+    color: var(--lime);
     opacity: 0;
     transform: translate(-50%, -50%);
     transition: opacity 0.2s ease, transform 0.08s ease;
@@ -1047,14 +1053,14 @@
   top: 0; left: 0;
   pointer-events: none;
   z-index: 9999;
-  color: #fa8406;
+  color: var(--lime);
   font-size: 14px;
   line-height: 1;
   opacity: 0;
   transform: translate(-50%, -50%);
   transition: opacity 0.3s ease;
   user-select: none;
-  text-shadow: 0 0 8px rgba(250,132,6,0.8), 0 0 20px rgba(250,132,6,0.4);
+  text-shadow: 0 0 8px var(--lime), 0 0 20px var(--lime);
 ">✦</div>
 
 <style>
