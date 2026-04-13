@@ -744,5 +744,63 @@
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 
+
+<div id="cursor-star" style="
+  position: fixed;
+  top: 0; left: 0;
+  pointer-events: none;
+  z-index: 9999;
+  color: var(--lime);
+  font-size: 14px;
+  line-height: 1;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  user-select: none;
+  text-shadow: 0 0 8px var(--lime), 0 0 20px var(--lime);
+">✦</div>
+
+<style>
+  * { cursor: none !important; }
+</style>
+
+<script>
+  const star = document.getElementById('cursor-star');
+  let mouseX = 0, mouseY = 0;
+  let starX = 0, starY = 0;
+  let visible = false;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    if (!visible) {
+      star.style.opacity = '1';
+      visible = true;
+    }
+  });
+
+  document.addEventListener('mouseleave', () => {
+    star.style.opacity = '0';
+    visible = false;
+  });
+
+  function animate() {
+    starX += (mouseX - starX) * 0.15;
+    starY += (mouseY - starY) * 0.15;
+    star.style.left = starX + 'px';
+    star.style.top = starY + 'px';
+    requestAnimationFrame(animate);
+  }
+  animate();
+
+  document.addEventListener('mousedown', () => {
+    star.style.transform = 'translate(-50%, -50%) scale(2) rotate(45deg)';
+    star.style.transition = 'transform 0.15s ease, opacity 0.3s ease';
+  });
+  document.addEventListener('mouseup', () => {
+    star.style.transform = 'translate(-50%, -50%) scale(1) rotate(0deg)';
+    star.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+  });
+</script>
 </body>
 </html>
