@@ -750,7 +750,11 @@
 <script>
   // Pick a random accent color on each load
   const accents = ['#fa8406', '#C8F135', '#06bbf9', '#e31fea'];
-  const pick = accents[Math.floor(Math.random() * accents.length)];
+  let pick = sessionStorage.getItem('accentColor');
+  if (!pick) {
+    pick = accents[Math.floor(Math.random() * accents.length)];
+    sessionStorage.setItem('accentColor', pick);
+  }
   document.documentElement.style.setProperty('--lime', pick);
 </script>
 
