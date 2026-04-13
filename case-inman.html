@@ -482,6 +482,7 @@
         <span class="chip">Creative brief governance</span>
         <span class="chip">Claude Code workflow</span>
         <span class="chip">GitHub Pages deploy</span>
+        <span class="chip">design.md documentation</span>
         <span class="chip">↳ Brand site — see case 02</span>
       </div>
     </div>
@@ -498,7 +499,7 @@
     <div class="content-section fade-in">
       <p class="content-label">The frame</p>
       <p>Design can&#8217;t be decoupled from business. Business can&#8217;t be decoupled from efficiency. Efficiency can&#8217;t be decoupled from AI. The question isn&#8217;t whether to adapt — it&#8217;s whether you build the infrastructure before or after the chaos arrives.</p>
-      <p>At Inman, I built it during the chaos. While tools were being sunsetted mid-sprint — Visual Electric, one of the best AI image generation tools available, shut down without warning — I was simultaneously building the systems that would make the department resilient to exactly that kind of disruption.</p>
+      <p>At Inman, I built it during the chaos. While the engineering team was rebuilding how they worked with AI, design couldn&#8217;t afford to be left behind — or worse, become a bottleneck in a workflow that was moving faster every week. The only way to stay relevant was to build infrastructure that could keep pace with how the whole organization was changing.</p>
       <div class="callout">
         <p>&#8220;The skill isn&#8217;t knowing which tools to use. It&#8217;s knowing how to move when they change.&#8221;</p>
       </div>
@@ -509,7 +510,7 @@
       <ul class="infra-list">
         <li class="infra-item">
           <span class="infra-num">01</span>
-          <span class="infra-text"><strong>Brand standards site</strong> — The infrastructure layer built on top of Inman&#8217;s brand refresh. Hosted on GitHub Pages via Claude Code — always current, always accessible to people and agents alike. The brand story lives in <a href="case-inman-brand.html" style="color: var(--lime); text-decoration: underline; text-underline-offset: 3px;">case 02</a>. This is what happens after the brand exists.</span>
+          <span class="infra-text"><strong>Brand standards site</strong> — The infrastructure layer built on top of Inman&#8217;s brand system. Hosted on GitHub Pages via Claude Code — always current, always accessible to people and agents alike. Paired with machine-readable brand documentation: <code style="font-size:0.85em; color: var(--lime); background: rgba(200,241,53,0.1); padding: 2px 6px; border-radius: 3px;">design.md</code> files that encode every design decision in a format both humans and AI can reference directly. The brand story lives in <a href="case-inman-brand.html" style="color: var(--lime); text-decoration: underline; text-underline-offset: 3px;">case 02</a>. This is what happens after the brand exists.</span>
         </li>
         <li class="infra-item">
           <span class="infra-num">02</span>
@@ -526,6 +527,10 @@
         <li class="infra-item">
           <span class="infra-num">05</span>
           <span class="infra-text"><strong>Tool evaluation</strong> — Currently testing Leonardo.ai to replace Visual Electric. The jury&#8217;s still out. This is the job now — continuous evaluation, rapid integration, no attachment to any single tool.</span>
+        </li>
+        <li class="infra-item">
+          <span class="infra-num">06</span>
+          <span class="infra-text"><strong>Machine-readable brand docs</strong> — The brand standards site is only half the infrastructure. The other half is <code style="font-size:0.85em; color: var(--lime); background: rgba(200,241,53,0.1); padding: 2px 6px; border-radius: 3px;">design.md</code> — a structured file that teaches Claude the entire Inman brand system. Not just values, but judgment calls: what&#8217;s universal vs. rare, what combinations are approved, how components behave. When AI generates anything for Inman, it works within documented constraints rather than guessing. This is what makes the system scalable without adding headcount.</span>
         </li>
       </ul>
     </div>
