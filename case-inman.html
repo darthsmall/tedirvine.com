@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inman — Ted Irvine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #130D24;
+    --lime: #C8F135;
+    --offwhite: #f0ede6;
+    --muted: #7A7488;
+    --dim: #2E1D52;
+    --purple-deep: #130D24;
+    --purple-mid: #1C1235;
+    --purple-border: #2E1D52;
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--offwhite);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    gap: 2rem;
+    background: var(--black);
+    border-bottom: 1px solid var(--dim);
+  }
+
+  .nav-name {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--offwhite);
+    margin-right: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .nav-links a { transition: color 0.2s; }
+  .nav-links a:hover { color: var(--offwhite); }
+
+  /* BACK LINK */
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4rem;
+    transition: color 0.2s;
+  }
+
+  .back:hover { color: var(--lime); }
+
+  /* HERO */
+  .case-hero {
+    padding: 10rem 3rem 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .case-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.1s forwards;
+  }
+
+  .case-tag::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: var(--lime);
+    opacity: 0.4;
+  }
+
+  .case-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--offwhite);
+    margin-bottom: 2rem;
+    font-weight: 700;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.2s forwards;
+  }
+
+  .case-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--lime);
+  }
+
+  .case-intro {
+    font-size: clamp(18px, 1.6vw, 22px);
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.6;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.3s forwards;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--purple-mid);
+    border-top: 1px solid var(--purple-border);
+    border-bottom: 1px solid var(--purple-border);
+    padding: 3rem;
+  }
+
+  .stats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .stat-item + .stat-item {
+    border-left: 1px solid var(--purple-border);
+    padding-left: 2rem;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 900;
+    color: var(--lime);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  /* BODY CONTENT */
+  .case-body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .case-sidebar {
+    position: sticky;
+    top: 7rem;
+  }
+
+  .sidebar-section {
+    margin-bottom: 3rem;
+  }
+
+  .sidebar-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  .sidebar-item {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .sidebar-item strong {
+    color: var(--offwhite);
+    font-weight: 400;
+    display: block;
+  }
+
+  .deliverables-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .chip {
+    font-size: 0.75rem;
+    color: var(--muted);
+    border: 1px solid var(--purple-border);
+    border-radius: 2px;
+    padding: 0.3rem 0.75rem;
+    display: inline-block;
+    width: fit-content;
+    letter-spacing: 0.02em;
+  }
+
+  /* MAIN CONTENT */
+  .case-content {}
+
+  .content-section {
+    margin-bottom: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--dim);
+  }
+
+  .content-section:last-child {
+    border-bottom: none;
+  }
+
+  .content-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+
+  .content-section p {
+    font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.75;
+    color: var(--offwhite);
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+  }
+
+  .content-section p:last-child { margin-bottom: 0; }
+
+  .callout {
+    border-left: 2px solid var(--lime);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .callout p {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 1.6vw, 22px) !important;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--offwhite) !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+  }
+
+  /* INFRA LIST */
+  .infra-list {
+    list-style: none;
+    margin: 2rem 0 0;
+  }
+
+  .infra-item {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--dim);
+  }
+
+  .infra-item:last-child { border-bottom: none; }
+
+  .infra-num {
+    font-size: 0.75rem;
+    color: var(--lime);
+    font-weight: 500;
+    padding-top: 3px;
+    opacity: 0.7;
+  }
+
+  .infra-text {
+    font-size: clamp(15px, 1.2vw, 17px);
+    color: var(--offwhite);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .infra-text strong {
+    font-weight: 500;
+    color: var(--offwhite);
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--dim);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    max-width: 100%;
+  }
+
+  footer a:hover { color: var(--offwhite); }
+
+  /* NEXT CASE */
+  .next-case {
+    background: var(--purple-mid);
+    border-top: 1px solid var(--purple-border);
+    padding: 4rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .next-case:hover { background: #231644; }
+
+  .next-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .next-title {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 3vw, 40px);
+    color: var(--offwhite);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .next-arrow {
+    font-size: 2rem;
+    color: var(--lime);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .case-body {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .case-sidebar { position: static; }
+    .stats-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+    .stat-item + .stat-item { border-left: none; border-top: 1px solid var(--purple-border); padding-left: 0; padding-top: 1.5rem; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.25rem 1.5rem; }
+    .nav-links { gap: 1.5rem; font-size: 0.8rem; }
+    .case-hero { padding: 8rem 1.5rem 3rem; }
+    .stats-bar { padding: 2rem 1.5rem; }
+    .case-body { padding: 4rem 1.5rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .next-case { padding: 2.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">Ted Irvine</div>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="case-hero">
+  <a href="index.html" class="back">← Back</a>
+  <p class="case-tag">Design · AI Infrastructure</p>
+  <h1 class="case-title">Building design<br>infrastructure for<br><em>the AI era</em></h1>
+  <p class="case-intro">How a one-person creative department stopped being the bottleneck — and built the systems that let the whole organization move faster.</p>
+</div>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item fade-in">
+      <div class="stat-num">8 yrs</div>
+      <div class="stat-label">As solo creative department</div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-num">3 mo</div>
+      <div class="stat-label">To rebuild the whole workflow</div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-num">2/3</div>
+      <div class="stat-label">Reduction in production time</div>
+    </div>
+  </div>
+</div>
+
+<div class="case-body">
+
+  <aside class="case-sidebar fade-in">
+    <div class="sidebar-section">
+      <p class="sidebar-label">Company</p>
+      <p class="sidebar-item"><strong>Inman</strong>Real estate media</p>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-label">Role</p>
+      <p class="sidebar-item"><strong>VP Design</strong>One-person department</p>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-label">Timeline</p>
+      <p class="sidebar-item"><strong>8 years total</strong>AI integration: last 3 months</p>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-label">Tools</p>
+      <p class="sidebar-item">Claude Code · thebrief.ai · GitHub Pages · After Effects · Leonardo.ai (testing)</p>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-label">Deliverables</p>
+      <div class="deliverables-list">
+        <span class="chip">ICSD event design system</span>
+        <span class="chip">thebrief.ai integration</span>
+        <span class="chip">Creative brief governance</span>
+        <span class="chip">Claude Code workflow</span>
+        <span class="chip">GitHub Pages deploy</span>
+        <span class="chip">↳ Brand site — see case 02</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="case-content">
+
+    <div class="content-section fade-in">
+      <p class="content-label">The situation</p>
+      <p>Eight years as Inman&#8217;s one-person creative department. Event graphics, social ads, presentations, brand assets — all of it flowing through one set of hands. I wasn&#8217;t just the designer. I was the bottleneck. Whole departments waited on me because I couldn&#8217;t clone myself.</p>
+      <p>Then three months ago, I stopped trying to keep up and started building infrastructure instead.</p>
+    </div>
+
+    <div class="content-section fade-in">
+      <p class="content-label">The frame</p>
+      <p>Design can&#8217;t be decoupled from business. Business can&#8217;t be decoupled from efficiency. Efficiency can&#8217;t be decoupled from AI. The question isn&#8217;t whether to adapt — it&#8217;s whether you build the infrastructure before or after the chaos arrives.</p>
+      <p>At Inman, I built it during the chaos. While tools were being sunsetted mid-sprint — Visual Electric, one of the best AI image generation tools available, shut down without warning — I was simultaneously building the systems that would make the department resilient to exactly that kind of disruption.</p>
+      <div class="callout">
+        <p>&#8220;The skill isn&#8217;t knowing which tools to use. It&#8217;s knowing how to move when they change.&#8221;</p>
+      </div>
+    </div>
+
+    <div class="content-section fade-in">
+      <p class="content-label">What I built</p>
+      <ul class="infra-list">
+        <li class="infra-item">
+          <span class="infra-num">01</span>
+          <span class="infra-text"><strong>Brand standards site</strong> — The infrastructure layer built on top of Inman&#8217;s brand refresh. Hosted on GitHub Pages via Claude Code — always current, always accessible to people and agents alike. The brand story lives in <a href="case-inman-brand.html" style="color: var(--lime); text-decoration: underline; text-underline-offset: 3px;">case 02</a>. This is what happens after the brand exists.</span>
+        </li>
+        <li class="infra-item">
+          <span class="infra-num">02</span>
+          <span class="infra-text"><strong>Production workflow</strong> — Integrated thebrief.ai as Inman&#8217;s primary design production tool, cutting production time by 2/3 across event graphics, social, ads, and presentations. One person, no longer the bottleneck.</span>
+        </li>
+        <li class="infra-item">
+          <span class="infra-num">03</span>
+          <span class="infra-text"><strong>Creative brief governance</strong> — Documented the AI workflow process so the entire team could operate within it, not just me. Infrastructure only works if others can use it.</span>
+        </li>
+        <li class="infra-item">
+          <span class="infra-num">04</span>
+          <span class="infra-text"><strong>Event design system</strong> — Full design system for Inman Connect San Diego 2026. Room color environments, badge artwork, stage graphics, LED wall backdrops, interactive pattern explorer. Built with AI assistance throughout.</span>
+        </li>
+        <li class="infra-item">
+          <span class="infra-num">05</span>
+          <span class="infra-text"><strong>Tool evaluation</strong> — Currently testing Leonardo.ai to replace Visual Electric. The jury&#8217;s still out. This is the job now — continuous evaluation, rapid integration, no attachment to any single tool.</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="content-section fade-in">
+      <p class="content-label">The bigger point</p>
+      <p>This isn&#8217;t a story about AI making design easier. It&#8217;s a story about what becomes possible when a creative department stops operating like a service bureau and starts operating like an infrastructure team.</p>
+      <p>The tools will keep changing. Visual Electric is gone. Something else will be gone next year. What doesn&#8217;t change is the need for systems, documentation, and someone who knows how to build them fast and rebuild them faster.</p>
+    </div>
+
+  </main>
+</div>
+
+<a href="case-inman-brand.html" class="next-case">
+  <div>
+    <p class="next-label">Next case study</p>
+    <p class="next-title">Inman brand refresh</p>
+  </div>
+  <div class="next-arrow">→</div>
+</a>
+
+<footer>
+  <span>© 2026 Ted Irvine</span>
+  <span>Lancaster, PA</span>
+  <a href="https://www.linkedin.com/in/tedirvine/" target="_blank">LinkedIn</a>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

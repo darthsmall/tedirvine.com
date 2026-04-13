@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design at Scale — Ted Irvine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #130D24;
+    --lime: #C8F135;
+    --offwhite: #f0ede6;
+    --muted: #7A7488;
+    --dim: #2E1D52;
+    --purple-deep: #130D24;
+    --purple-mid: #1C1235;
+    --purple-border: #2E1D52;
+    --font-display: 'Playfair Display', serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--offwhite);
+    font-family: var(--font-body);
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    gap: 2rem;
+    background: var(--black);
+    border-bottom: 1px solid var(--dim);
+  }
+
+  .nav-name {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--offwhite);
+    margin-right: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .nav-links a { transition: color 0.2s; }
+  .nav-links a:hover { color: var(--offwhite); }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4rem;
+    transition: color 0.2s;
+  }
+
+  .back:hover { color: var(--lime); }
+
+  .case-hero {
+    padding: 10rem 3rem 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .case-tag {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.1s forwards;
+  }
+
+  .case-tag::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 40px;
+    background: var(--lime);
+    opacity: 0.4;
+  }
+
+  .case-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 7vw, 96px);
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--offwhite);
+    margin-bottom: 2rem;
+    font-weight: 700;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.2s forwards;
+  }
+
+  .case-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--lime);
+  }
+
+  .case-intro {
+    font-size: clamp(18px, 1.6vw, 22px);
+    color: var(--muted);
+    max-width: 600px;
+    line-height: 1.6;
+    font-weight: 300;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.3s forwards;
+  }
+
+  .stats-bar {
+    background: var(--purple-mid);
+    border-top: 1px solid var(--purple-border);
+    border-bottom: 1px solid var(--purple-border);
+    padding: 3rem;
+  }
+
+  .stats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .stat-item { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .stat-item + .stat-item {
+    border-left: 1px solid var(--purple-border);
+    padding-left: 2rem;
+  }
+
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 900;
+    color: var(--lime);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .case-body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 3rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .case-sidebar { position: sticky; top: 7rem; }
+
+  .sidebar-section { margin-bottom: 3rem; }
+
+  .sidebar-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 1rem;
+    opacity: 0.8;
+  }
+
+  .sidebar-item {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .sidebar-item strong {
+    color: var(--offwhite);
+    font-weight: 400;
+    display: block;
+  }
+
+  .properties-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .chip {
+    font-size: 0.75rem;
+    color: var(--muted);
+    border: 1px solid var(--purple-border);
+    border-radius: 2px;
+    padding: 0.3rem 0.75rem;
+    display: inline-block;
+    width: fit-content;
+    letter-spacing: 0.02em;
+  }
+
+  .content-section {
+    margin-bottom: 4rem;
+    padding-bottom: 4rem;
+    border-bottom: 1px solid var(--dim);
+  }
+
+  .content-section:last-child { border-bottom: none; }
+
+  .content-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 1.5rem;
+    opacity: 0.8;
+  }
+
+  .content-section p {
+    font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.75;
+    color: var(--offwhite);
+    font-weight: 300;
+    margin-bottom: 1.25rem;
+  }
+
+  .content-section p:last-child { margin-bottom: 0; }
+
+  .callout {
+    border-left: 2px solid var(--lime);
+    padding: 1rem 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .callout p {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 1.6vw, 22px) !important;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--offwhite) !important;
+    line-height: 1.5 !important;
+    margin: 0 !important;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+
+  .era-card {
+    background: var(--purple-mid);
+    border: 1px solid var(--purple-border);
+    border-radius: 4px;
+    padding: 1.75rem;
+  }
+
+  .era-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lime);
+    margin-bottom: 1rem;
+    opacity: 0.7;
+  }
+
+  .era-title {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--offwhite);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .era-body {
+    font-size: 0.9rem !important;
+    color: var(--muted) !important;
+    line-height: 1.6 !important;
+    margin: 0 !important;
+  }
+
+  .next-case {
+    background: var(--purple-mid);
+    border-top: 1px solid var(--purple-border);
+    padding: 4rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .next-case:hover { background: #231644; }
+
+  .next-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .next-title {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 3vw, 40px);
+    color: var(--offwhite);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .next-arrow { font-size: 2rem; color: var(--lime); }
+
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid var(--dim);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+
+  footer a:hover { color: var(--offwhite); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    .case-body { grid-template-columns: 1fr; gap: 3rem; }
+    .case-sidebar { position: static; }
+    .stats-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+    .stat-item + .stat-item { border-left: none; border-top: 1px solid var(--purple-border); padding-left: 0; padding-top: 1.5rem; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 1.25rem 1.5rem; }
+    .nav-links { gap: 1.5rem; font-size: 0.8rem; }
+    .case-hero { padding: 8rem 1.5rem 3rem; }
+    .stats-bar { padding: 2rem 1.5rem; }
+    .case-body { padding: 4rem 1.5rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    .next-case { padding: 2.5rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-name">Ted Irvine</div>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="case-hero">
+  <a href="index.html" class="back">← Back</a>
+  <p class="case-tag">Design · Scale · Leadership</p>
+  <h1 class="case-title">Design at scale:<br><em>the Vox era</em></h1>
+  <p class="case-intro">What it took to scale creative output across 300+ sites and 8 major properties the old way — and why the answer has fundamentally changed.</p>
+</div>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item fade-in">
+      <div class="stat-num">300+</div>
+      <div class="stat-label">SB Nation sites alone</div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-num">8</div>
+      <div class="stat-label">Major properties across Vox Media</div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-num">4</div>
+      <div class="stat-label">Person team at the start</div>
+    </div>
+  </div>
+</div>
+
+<div class="case-body">
+
+  <aside class="case-sidebar fade-in">
+    <div class="sidebar-section">
+      <p class="sidebar-label">Company</p>
+      <p class="sidebar-item"><strong>Vox Media</strong>Digital media</p>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-label">Role</p>
+      <p class="sidebar-item"><strong>VP Design</strong>Design leadership across portfolio</p>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-label">Origin</p>
+      <p class="sidebar-item"><strong>SB Nation</strong>Sports media, team of 4</p>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-label">Scale approach</p>
+      <p class="sidebar-item">Hired · Contracted · Restructured</p>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-label">Properties</p>
+      <div class="properties-list">
+        <span class="chip">SB Nation (300+ sites)</span>
+        <span class="chip">The Verge</span>
+        <span class="chip">Polygon</span>
+        <span class="chip">Vox.com</span>
+        <span class="chip">Eater</span>
+        <span class="chip">Curbed</span>
+        <span class="chip">Racked</span>
+        <span class="chip">Recode</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="case-content fade-in">
+
+    <div class="content-section">
+      <p class="content-label">Where it started</p>
+      <p>It started as SB Nation — a sports media company with a design team of four, supporting over 300 individual team sites. Scrappy, fast, figuring it out as the audience grew. When Vox Media formed around it and the portfolio expanded to include The Verge, Polygon, Eater, Curbed, Racked, Recode, and Vox.com, the design challenge became less about craft and more about capacity.</p>
+      <p>How do you maintain quality and consistency across properties that each have their own voice, audience, and editorial identity? How do you move fast enough to keep up with a media company that&#8217;s growing faster than you can hire?</p>
+    </div>
+
+    <div class="content-section">
+      <p class="content-label">The old answer</p>
+      <p>Bodies. When you needed more output, the answer was more people. Hire designers, bring in contractors, restructure teams as priorities shifted. We did all three — sometimes simultaneously.</p>
+      <p>It worked, to a point. Vox Media was genuinely nimble for an org of its size, and the design team punched above its weight across the entire portfolio. But the model had a ceiling. Every new property meant new headcount conversations. Every spike in demand meant a contractor search. Every restructure meant onboarding time, coordination overhead, and the inevitable inconsistency that comes from spinning people up and down.</p>
+
+      <div class="callout">
+        <p>&#8220;The best thing I did wasn&#8217;t hire more designers. It was hire young talent and grow them with the business.&#8221;</p>
+      </div>
+
+      <p>The thing I&#8217;m proudest of from that era isn&#8217;t the output — it&#8217;s the people. Hiring early-career designers and developing them as the company scaled meant the team grew in judgment, not just headcount. That investment in people is what made the quality hold across 20+ properties.</p>
+    </div>
+
+    <div class="content-section">
+      <p class="content-label">Two eras of scale</p>
+      <p>The Vox era taught me what scaling design actually requires. The AI era is showing me that most of that infrastructure can now be built without adding a single headcount.</p>
+
+      <div class="two-col">
+        <div class="era-card">
+          <p class="era-label">Then</p>
+          <p class="era-title">Bodies were<br>the solution</p>
+          <p class="era-body">Hire, contract, restructure. Scale through people. Coordination overhead, onboarding time, quality variance. High ceiling, high cost.</p>
+        </div>
+        <div class="era-card">
+          <p class="era-label">Now</p>
+          <p class="era-title">Systems are<br>the solution</p>
+          <p class="era-body">Build infrastructure, deploy agents, document everything. Scale through design systems that anyone — or any model — can work within.</p>
+        </div>
+      </div>
+
+      <p>The judgment layer hasn&#8217;t changed. Knowing what good looks like, knowing when something is off-brand, knowing how to give direction that produces the right result — that still lives in a person. What&#8217;s changed is everything underneath it.</p>
+    </div>
+
+    <div class="content-section">
+      <p class="content-label">Why it matters now</p>
+      <p>I spent years learning how to scale design the hard way. That experience is exactly what makes AI integration legible — I know what the work requires, which means I know what to hand off and what to hold onto.</p>
+      <p>The designers who will matter most in the next few years aren&#8217;t the ones who know the most tools. They&#8217;re the ones who understand scale — what it demands, what it breaks, and how to build systems that hold up under it.</p>
+    </div>
+
+  </main>
+</div>
+
+<a href="case-inman.html" class="next-case">
+  <div>
+    <p class="next-label">Next case study</p>
+    <p class="next-title">Building design infrastructure for the AI era</p>
+  </div>
+  <div class="next-arrow">→</div>
+</a>
+
+<footer>
+  <span>© 2026 Ted Irvine</span>
+  <span>Lancaster, PA</span>
+  <a href="https://www.linkedin.com/in/tedirvine/" target="_blank">LinkedIn</a>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
