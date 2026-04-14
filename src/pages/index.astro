@@ -5,7 +5,7 @@ import Layout from '../layouts/Layout.astro';
 
 <!-- HERO -->
 <div class="hero">
-  <img src="/images/iss071e439624~orig.jpg" alt="" aria-hidden="true" class="hero-bg-img">
+  <img src="/images/iss071e439624~orig.jpg" alt="" aria-hidden="true" class="hero-bg-img" id="hero-bg-img">
   <div style="position:absolute;inset:0;background:linear-gradient(to bottom, transparent 0%, transparent 45%, rgba(13,9,24,0.7) 70%, rgba(13,9,24,0.97) 100%);z-index:1;pointer-events:none;"></div>
   <div class="hero-content">
     <p class="hero-label">Available for new work</p>
@@ -151,6 +151,22 @@ import Layout from '../layouts/Layout.astro';
   lbClose.addEventListener('click', closeLightbox);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLightbox(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+
+<script is:inline>
+  const heroImages = [
+    '/images/iss071e439624~orig.jpg',
+    '/images/iss040e006303~orig.jpg',
+    '/images/PIA10955~orig.jpg',
+    '/images/PIA15415~orig.jpg',
+    '/images/PIA17563~orig.jpg',
+  ];
+  let pick = sessionStorage.getItem('heroBg');
+  if (!pick) {
+    pick = heroImages[Math.floor(Math.random() * heroImages.length)];
+    sessionStorage.setItem('heroBg', pick);
+  }
+  document.getElementById('hero-bg-img').src = pick;
 </script>
 
 </Layout>
