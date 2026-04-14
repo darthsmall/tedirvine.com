@@ -5,30 +5,8 @@ import Layout from '../layouts/Layout.astro';
 
 <!-- HERO -->
 <div class="hero">
-  <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(13,9,24,0.6) 0%, rgba(13,9,24,0.3) 40%, rgba(13,9,24,0.9) 100%);z-index:0;pointer-events:none;"></div>
-  <div class="hero-svg-trace">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 864 864" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;">
-      <defs>
-        <radialGradient id="orb1" cx="70%" cy="15%" r="60%">
-          <stop offset="0%" stop-color="#7B5EA7" stop-opacity="0.55"/>
-          <stop offset="100%" stop-color="#7B5EA7" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="orb2" cx="85%" cy="55%" r="45%">
-          <stop offset="0%" stop-color="#C084FC" stop-opacity="0.3"/>
-          <stop offset="100%" stop-color="#C084FC" stop-opacity="0"/>
-        </radialGradient>
-        <radialGradient id="orb3" cx="15%" cy="85%" r="45%">
-          <stop offset="0%" stop-color="#818CF8" stop-opacity="0.25"/>
-          <stop offset="100%" stop-color="#818CF8" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-      <rect width="864" height="864" fill="url(#orb1)"/>
-      <rect width="864" height="864" fill="url(#orb2)"/>
-      <rect width="864" height="864" fill="url(#orb3)"/>
-    </svg>
-  </div>
-  <div class="hero-pulse"></div>
-  <div class="hero-pulse2"></div>
+  <img src="/images/iss071e439624~orig.jpg" alt="" aria-hidden="true" class="hero-bg-img">
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom, transparent 0%, transparent 45%, rgba(13,9,24,0.7) 70%, rgba(13,9,24,0.97) 100%);z-index:1;pointer-events:none;"></div>
   <div class="hero-content">
     <p class="hero-label">Available for new work</p>
     <h1 class="hero-name">
