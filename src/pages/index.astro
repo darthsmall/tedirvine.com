@@ -129,37 +129,6 @@ import Layout from '../layouts/Layout.astro';
 
 <div class="divider"></div>
 
-<!-- SELECTED WORK -->
-<section id="selected-work">
-  <div class="section-label">Selected work</div>
-  <div class="work-images fade-in">
-    <a href="/case-vox" class="img-item" data-caption="SB Nation — editorial design at scale">
-      <img src="/images/work-01.jpg" alt="SB Nation editorial design at scale" loading="lazy">
-      <div class="img-caption">SB Nation — editorial design at scale</div>
-    </a>
-    <a href="/case-inman-brand" class="img-item" data-caption="Inman Connect 19 — event design system">
-      <img src="/images/work-02.jpg" alt="Inman Connect 19 event design system" loading="lazy">
-      <div class="img-caption">Inman Connect 19 — event design system</div>
-    </a>
-    <a href="/case-vox" class="img-item" data-caption="Vox.com — editorial identity">
-      <img src="/images/work-03.jpg" alt="Vox.com editorial identity" loading="lazy">
-      <div class="img-caption">Vox.com — editorial identity</div>
-    </a>
-    <a href="/case-vox" class="img-item" data-caption="Eater — brand extension">
-      <img src="/images/work-04.jpg" alt="Eater brand extension" loading="lazy">
-      <div class="img-caption">Eater — brand extension</div>
-    </a>
-    <a href="/case-vox" class="img-item" data-caption="SB Nation — 300+ site system">
-      <img src="/images/work-05.jpg" alt="SB Nation 300+ site system" loading="lazy">
-      <div class="img-caption">SB Nation — 300+ site system</div>
-    </a>
-    <a href="/case-inman-brand" class="img-item" data-caption="Inman — brand system">
-      <img src="/images/work-06.jpg" alt="Inman brand system" loading="lazy">
-      <div class="img-caption">Inman — brand system</div>
-    </a>
-  </div>
-</section>
-
 <!-- CONTACT -->
 <section id="contact">
   <div class="section-label">Contact</div>
@@ -172,42 +141,6 @@ import Layout from '../layouts/Layout.astro';
   </div>
 </section>
 
-<!-- LIGHTBOX -->
-<div class="lightbox-overlay" id="lightbox">
-  <button class="lightbox-close" id="lightbox-close">✕</button>
-  <img src="" id="lightbox-img" alt="">
-  <div class="lightbox-caption" id="lightbox-caption"></div>
-</div>
-
-<script>
-  const overlay = document.getElementById('lightbox')!;
-  const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
-  const lbCaption = document.getElementById('lightbox-caption')!;
-  const lbClose = document.getElementById('lightbox-close')!;
-
-  document.querySelectorAll<HTMLAnchorElement>('.img-item').forEach(item => {
-    item.addEventListener('click', (e) => {
-      e.preventDefault();
-      const img = item.querySelector('img');
-      if (!img) return;
-      lbImg.src = img.src;
-      lbImg.alt = img.alt;
-      lbCaption.textContent = item.dataset.caption ?? '';
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-    });
-  });
-
-  function closeLightbox() {
-    overlay.classList.remove('active');
-    document.body.style.overflow = '';
-    lbImg.src = '';
-  }
-
-  lbClose.addEventListener('click', closeLightbox);
-  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLightbox(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
-</script>
 
 <script is:inline>
   const heroImages = [
