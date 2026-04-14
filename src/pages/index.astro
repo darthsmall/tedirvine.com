@@ -161,12 +161,12 @@ import Layout from '../layouts/Layout.astro';
     '/images/PIA15415.jpg',
     '/images/PIA17563.jpg',
   ];
-  let pick = sessionStorage.getItem('heroBg');
-  if (!pick) {
-    pick = heroImages[Math.floor(Math.random() * heroImages.length)];
-    sessionStorage.setItem('heroBg', pick);
+  let heroBg = sessionStorage.getItem('heroBg');
+  if (!heroBg) {
+    heroBg = heroImages[Math.floor(Math.random() * heroImages.length)];
+    sessionStorage.setItem('heroBg', heroBg);
   }
-  document.getElementById('hero-bg-img').src = pick;
+  document.getElementById('hero-bg-img').src = heroBg;
 </script>
 
 </Layout>
