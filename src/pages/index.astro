@@ -1,0 +1,178 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Ted Irvine — Full-stack creative">
+
+<!-- HERO -->
+<div class="hero">
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom, rgba(13,9,24,0.6) 0%, rgba(13,9,24,0.3) 40%, rgba(13,9,24,0.9) 100%);z-index:0;pointer-events:none;"></div>
+  <div class="hero-svg-trace">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 864 864" preserveAspectRatio="xMidYMid slice" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;">
+      <defs>
+        <radialGradient id="orb1" cx="70%" cy="15%" r="60%">
+          <stop offset="0%" stop-color="#7B5EA7" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#7B5EA7" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="orb2" cx="85%" cy="55%" r="45%">
+          <stop offset="0%" stop-color="#C084FC" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#C084FC" stop-opacity="0"/>
+        </radialGradient>
+        <radialGradient id="orb3" cx="15%" cy="85%" r="45%">
+          <stop offset="0%" stop-color="#818CF8" stop-opacity="0.25"/>
+          <stop offset="100%" stop-color="#818CF8" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="864" height="864" fill="url(#orb1)"/>
+      <rect width="864" height="864" fill="url(#orb2)"/>
+      <rect width="864" height="864" fill="url(#orb3)"/>
+    </svg>
+  </div>
+  <div class="hero-pulse"></div>
+  <div class="hero-pulse2"></div>
+  <div class="hero-content">
+    <p class="hero-label">Available for new work</p>
+    <h1 class="hero-name">
+      <span class="first">Ted</span>
+      <span class="last">Irvine</span>
+    </h1>
+    <p class="hero-tagline">Full-stack creative. AI-integrated across brand, product, video, and events.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn">Get in touch</a>
+      <a href="#work" class="btn btn-ghost">See the work</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-text fade-in">
+    <p>Some designers manage. Some still make things. Few do both.</p>
+    <p>I&#8217;ve spent 15+ years building teams, shaping brands, and never quite putting the tools down. That last part matters. At Vox Media, I took a three-person design group and built it into a 50-person department.</p>
+    <p>At Inman, I run design across the whole organization — product, events, editorial, brand. Smaller stage, sharper mandate.</p>
+    <p>Getting closer to execution opened a door I didn&#8217;t expect. I watched our dev team rebuild how they worked with AI and decided to figure out how design could fit into that. The first version of everything needed rebuilding. Move fast, fail, fix. Build infrastructure you can actually rely on coming out the other side.</p>
+    <p>What I&#8217;ve learned is that working with AI isn&#8217;t a skill problem, it&#8217;s a collaboration problem. You problem-solve together, the same way you would with any good colleague.</p>
+    <p style="border-top: 1px solid var(--dim); padding-top: 1.5rem; margin-top: 0.5rem;">I think in systems. I design for humans. I build teams that outperform their size, and I stay close enough to the work to know when something&#8217;s off.</p>
+    <p style="font-size: 0.85rem; color: var(--muted); margin-top: 0.25rem;">Based in Lancaster, PA.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WORK -->
+<div id="work" style="background: var(--purple-deep); padding: 7rem 0;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 3rem;">
+    <div class="section-label">Work</div>
+    <div class="work-grid">
+
+      <a href="/case-inman" class="case fade-in">
+        <div class="case-number">01</div>
+        <div class="case-tag">Design · AI Infrastructure</div>
+        <h2 class="case-title">Building an AI-augmented<br>creative department</h2>
+        <p class="case-desc">One-person department. Full event and editorial creative output. Built an AI-integrated workflow, governance process, and brand system from scratch — and shipped everything on time.</p>
+        <div class="case-arrow">↗</div>
+      </a>
+
+      <a href="/case-inman-brand" class="case fade-in">
+        <div class="case-number">02</div>
+        <div class="case-tag">Brand · Identity · Systems</div>
+        <h2 class="case-title">Inman brand refresh</h2>
+        <p class="case-desc">Full brand system for a real estate media company — visual identity, design tokens, component library, and a self-hosted brand standards site built entirely in Claude Code.</p>
+        <div class="case-arrow">↗</div>
+      </a>
+
+      <a href="/case-vox" class="case fade-in">
+        <div class="case-number">03</div>
+        <div class="case-tag">Editorial · Scale · Vox Media</div>
+        <h2 class="case-title">Design at scale:<br>The Vox era</h2>
+        <p class="case-desc">Before AI, I scaled design departments across 20+ properties at Vox Media — Vox.com, SB Nation, Eater, Polygon. The foundation that everything since is built on.</p>
+        <div class="case-arrow">↗</div>
+      </a>
+
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- SELECTED WORK -->
+<section id="selected-work">
+  <div class="section-label">Selected work</div>
+  <div class="work-images fade-in">
+    <a href="/case-vox" class="img-item" data-caption="SB Nation — editorial design at scale">
+      <img src="/images/work-01.jpg" alt="SB Nation editorial design at scale" loading="lazy">
+      <div class="img-caption">SB Nation — editorial design at scale</div>
+    </a>
+    <a href="/case-inman-brand" class="img-item" data-caption="Inman Connect 19 — event design system">
+      <img src="/images/work-02.jpg" alt="Inman Connect 19 event design system" loading="lazy">
+      <div class="img-caption">Inman Connect 19 — event design system</div>
+    </a>
+    <a href="/case-vox" class="img-item" data-caption="Vox.com — editorial identity">
+      <img src="/images/work-03.jpg" alt="Vox.com editorial identity" loading="lazy">
+      <div class="img-caption">Vox.com — editorial identity</div>
+    </a>
+    <a href="/case-vox" class="img-item" data-caption="Eater — brand extension">
+      <img src="/images/work-04.jpg" alt="Eater brand extension" loading="lazy">
+      <div class="img-caption">Eater — brand extension</div>
+    </a>
+    <a href="/case-vox" class="img-item" data-caption="SB Nation — 300+ site system">
+      <img src="/images/work-05.jpg" alt="SB Nation 300+ site system" loading="lazy">
+      <div class="img-caption">SB Nation — 300+ site system</div>
+    </a>
+    <a href="/case-inman-brand" class="img-item" data-caption="Inman — brand system">
+      <img src="/images/work-06.jpg" alt="Inman brand system" loading="lazy">
+      <div class="img-caption">Inman — brand system</div>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <div class="contact-inner fade-in">
+    <h2 class="contact-headline">Let&#8217;s make<br>something<br><span>worth making.</span></h2>
+    <p class="contact-body">Whether you&#8217;re starting from scratch or already moving fast — I&#8217;m looking for work where design, technology, and AI all live in the same room.</p>
+    <div>
+      <a href="mailto:ted.irvine@gmail.com" class="btn">ted.irvine@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox">
+  <button class="lightbox-close" id="lightbox-close">✕</button>
+  <img src="" id="lightbox-img" alt="">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
+</div>
+
+<script>
+  const overlay = document.getElementById('lightbox')!;
+  const lbImg = document.getElementById('lightbox-img') as HTMLImageElement;
+  const lbCaption = document.getElementById('lightbox-caption')!;
+  const lbClose = document.getElementById('lightbox-close')!;
+
+  document.querySelectorAll<HTMLAnchorElement>('.img-item').forEach(item => {
+    item.addEventListener('click', (e) => {
+      e.preventDefault();
+      const img = item.querySelector('img');
+      if (!img) return;
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbCaption.textContent = item.dataset.caption ?? '';
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeLightbox() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+    lbImg.src = '';
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeLightbox(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+</script>
+
+</Layout>

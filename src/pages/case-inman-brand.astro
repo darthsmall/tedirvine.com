@@ -1,0 +1,185 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const inmanLogoSvg = "data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2OTAuNzUgMTczLjkxIj48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6I2ZmZjt9LmNscy0ye2ZpbGw6IzBhODBmZjt9PC9zdHlsZT48L2RlZnM+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNNTksMTY5LjgzdjEuMjhjLTcuNDEtLjUxLTE4LjEzLS41MS0yOS4xMi0uNTFzLTIxLjQ1LDAtMjkuODguNTF2LTEuMjhjMTAuNzMtNC4zNCwxMi41MS05LjQ1LDEyLjUxLTM4LjU3di00Mi40YzAtMjYuNTYtMS43OS0zMS4xNC0xMi41MS0zNy43OHYtMS4yOGMxNy44OCwwLDMwLjE0LjIzLDQ3LjI1LS4yOHY4MS45OGMwLDI4Ljg2LDEuNTMsMzMuOTcsMTEuNzUsMzguMzFaIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMjAwLjg1LDE3MS4xMWMtOC40My0uNTEtMTcuNjItLjUxLTI4Ljg2LS41MXMtMjAuOTQsMC0yOC42LjUxdi0xLjI4YzkuNDUtNC4zNCwxMS4yNC05LjQ1LDExLjI0LTM2Ljc4di00MS42M2MwLTE0LjU2LTcuMTUtMjEuNDUtMTguNjQtMjEuNDUtMTAuNDcsMC0yMS43MSw3LjE1LTIxLjcxLDIxLjcxdjQxLjYzYzAsMjcuMDcsMS41MywzMi4xOCwxMS4yNCwzNi41MnYxLjI4Yy03LjY2LS41MS0xNy4zNy0uNTEtMjguNjEtLjUxcy0yMC45NCwwLTI5LjM3LjUxdi0xLjI4YzEwLjIyLTQuMzQsMTItOS40NSwxMi0zNi43OHYtNDQuMThjMC0yNi41Ni0xLjc5LTMxLjE0LTEyLTM3Ljc4di0xLjI4YzE3Ljg4LDAsMjkuODguMjMsNDYuNzQtLjI4djI0Ljc3YzYuOS0xNS4zMiwyMS40NS0yNy4zMywzOS44NC0yNy4zMywyNC41MiwwLDM1LjI1LDE2LjA5LDM1LjI1LDM4LjgydjQ3LjI1YzAsMjcuMzMsMS43OSwzMi40NCwxMS40OSwzNi43OHYxLjI4WiIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTQxNC4zNSwxNzEuMTFjLTguMTctLjUxLTE3LjYyLS41MS0yOC44Ni0uNTFzLTIwLjk0LDAtMjguMzUuNTF2LTEuMjhjOS40NS00LjM0LDEwLjk4LTkuNDUsMTAuOTgtMzYuNzh2LTQxLjYzYzAtMTQuNTYtNi45LTIxLjQ1LTE3Ljg4LTIxLjQ1LTkuOTYsMC0yMC42OSw3LjE1LTIwLjY5LDIxLjcxdjQxLjM3YzAsMjcuMzMsMS43OSwzMi40NCwxMiwzNi43OHYxLjI4Yy04LjE3LS41MS0xOC4xMy0uNTEtMjkuMzctLjUxcy0yMC45NCwwLTI4LjYxLjUxdi0xLjI4YzkuNzEtNC4zNCwxMS4yNC05LjQ1LDExLjI0LTM2Ljc4di00MS42M2MwLTE0LjU2LTYuOS0yMS40NS0xNy44OC0yMS40NS05Ljk2LDAtMjAuNjksNy4xNS0yMC42OSwyMS43MXY0MS42M2MwLDI3LjA3LDEuNTMsMzIuMTgsMTEuMjQsMzYuNTJ2MS4yOGMtNy40MS0uNTEtMTcuMzctLjUxLTI4LjYxLS41MXMtMjEuMiwwLTI5LjM3LjUxdi0xLjI4YzEwLjIyLTQuMzQsMTItOS40NSwxMi0zNi43OHYtNDQuMThjMC0yNi41Ni0xLjc5LTMxLjE0LTEyLTM3Ljc4di0xLjI4YzE3LjYyLDAsMzAuMTQuMjMsNDYuNzQtLjI4djI0LjUyYzYuOS0xNS4zMiwyMS4yLTI3LjA3LDM4LjgyLTI3LjA3LDIwLjE4LDAsMzAuOSwxMS40OSwzMy43MSwyOC42MSw2LjM5LTE2LjA5LDIxLjItMjguNjEsMzkuNTktMjguNjEsMjQuMDEsMCwzNC40OCwxNi4wOSwzNC40OCwzOC44MnY0Ny4yNWMwLDI3LjMzLDIuMDQsMzIuNDQsMTEuNDksMzYuNzh2MS4yOFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik00OTAuMTksMTU4LjM0Yy0xMi43NywxMS4yNC0yMi4yMiwxNS41OC0zNS41LDE1LjU4LTE4LjM5LDAtMzAuMTQtMTIuMjYtMzAuMTQtMzEuNDEsMC0yNC4wMSwxNy44OC0zNi4yNyw2NS42NC0zOS44NHYtMTUuODNjMC0xNC41Ni02LjY0LTE5LjY3LTE3LjYyLTE5LjY3cy0yMS43MSw2LjM4LTM1LjUsMjIuMjJsLTEuMDItLjI2Yy0uMjYtMTAuNDctMS4wMi0xOS40MS0yLjMtMjguNjEsMTMuMjgtNy40MSwzMS42Ny0xMy41NCw0OC43OC0xMy41NCwyNi4wNSwwLDQxLjYzLDEyLjUxLDQxLjYzLDQxLjg5djQ0LjQ0YzAsMjcuMzMsMS43OSwzMi40NCwxMS40OSwzNi4yN3YxLjI4Yy0xNy42MiwwLTI4LjYuMjYtNDUuNDYuNzd2LTEzLjI4Wk00NzMuMzMsMTU3LjA2YzQuODUsMCw5Ljk2LTEuNzksMTYuODYtNS42MnYtMzQuMjJjLTI2LjgyLDIuNTUtMzIuNDQsMTAuOTgtMzIuNDQsMjIuNDhzNS42MiwxNy4zNywxNS41OCwxNy4zN1oiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik02NzcuMTIsMTcxLjExYy04LjQzLS41MS0xNy42Mi0uNTEtMjguODYtLjUxcy0yMC45NCwwLTI4LjYuNTF2LTEuMjhjOS40NS00LjM0LDExLjI0LTkuNDUsMTEuMjQtMzYuNzh2LTQxLjYzYzAtMTQuNTYtNy4xNS0yMS40NS0xOC42NC0yMS40NS0xMC40NywwLTIxLjcxLDcuMTUtMjEuNzEsMjEuNzF2NDEuNjNjMCwyNy4wNywxLjUzLDMyLjE4LDExLjI0LDM2LjUydjEuMjhjLTcuNjYtLjUxLTE3LjM3LS41MS0yOC42MS0uNTFzLTIwLjk0LDAtMjkuMzcuNTF2LTEuMjhjMTAuMjItNC4zNCwxMi05LjQ1LDEyLTM2Ljc4di00NC4xOGMwLTI2LjU2LTEuNzktMzEuMTQtMTItMzcuNzh2LTEuMjhjMTcuODgsMCwyOS44OC4yMyw0Ni43NC0uMjh2MjQuNzdjNi45LTE1LjMyLDIxLjQ1LTI3LjMzLDM5Ljg0LTI3LjMzLDI0LjUyLDAsMzUuMjUsMTYuMDksMzUuMjUsMzguODJ2NDcuMjVjMCwyNy4zMywxLjc5LDMyLjQ0LDExLjQ5LDM2Ljc4djEuMjhaIi8+PGNpcmNsZSBjbGFzcz0iY2xzLTIiIGN4PSIyOS41MiIgY3k9IjE3LjE3IiByPSIxNy4xNyIvPjwvc3ZnPg==";
+---
+<Layout
+  title="Inman Brand Refresh — Ted Irvine"
+  ogUrl="https://tedirvine.com/case-inman-brand"
+>
+
+<div class="case-hero">
+  <a href="/" class="back">← Back</a>
+  <p class="case-tag">Brand · Identity · Systems</p>
+  <h1 class="case-title">Inman brand<br><em>refresh</em></h1>
+  <p class="case-intro">Solo brand work built on editorial authority — then, three months ago, AI entered the picture and changed how that brand gets maintained and scaled.</p>
+</div>
+
+<div class="brand-band fade-in">
+  <div class="brand-band-inner">
+    <img src={inmanLogoSvg} alt="Inman" style="height: 44px; width: auto;" />
+    <div class="color-swatches">
+      <div class="swatch-group">
+        <div class="swatch" style="background:#161a48;"></div>
+        <div class="swatch-label">Navy</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#0a84ff;"></div>
+        <div class="swatch-label">Blue</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#da3832;"></div>
+        <div class="swatch-label">Red</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#232323;"></div>
+        <div class="swatch-label">Near-black</div>
+      </div>
+      <div class="swatch-group">
+        <div class="swatch" style="background:#ffffff; border: 1px solid rgba(255,255,255,0.2);"></div>
+        <div class="swatch-label">White</div>
+      </div>
+    </div>
+    <div class="type-sample">
+      <div class="type-sample-sans">HEX Franklin Variable</div>
+      <div class="type-sample-serif">Harriet Display</div>
+      <div class="type-sample-label">Primary · Editorial</div>
+    </div>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item fade-in">
+      <div class="stat-num">8 yrs</div>
+      <div class="stat-label">Brand evolution</div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-num">3</div>
+      <div class="stat-label">Typefaces with distinct roles</div>
+    </div>
+    <div class="stat-item fade-in">
+      <div class="stat-num">Solo</div>
+      <div class="stat-label">Direction and execution</div>
+    </div>
+  </div>
+</div>
+
+<div class="case-body">
+
+  <aside class="case-sidebar fade-in">
+    <div class="sidebar-section">
+      <p class="sidebar-label">Company</p>
+      <p class="sidebar-item"><strong>Inman</strong>Real estate media</p>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-label">Role</p>
+      <p class="sidebar-item"><strong>VP Design</strong>Brand direction, identity, system</p>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-label">Typography</p>
+      <p class="sidebar-item">HEX Franklin Variable · Harriet Display · Tungsten</p>
+    </div>
+    <div class="sidebar-section">
+      <p class="sidebar-label">Deliverables</p>
+      <div class="deliverables-list">
+        <span class="chip">Logo & wordmark</span>
+        <span class="chip">Color system</span>
+        <span class="chip">Typography system</span>
+        <span class="chip">Component library</span>
+        <span class="chip">Brand standards site</span>
+        <span class="chip">design.md documentation</span>
+        <span class="chip">Editorial guidelines</span>
+        <span class="chip">Event design system</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="case-content">
+
+    <div class="content-section fade-in">
+      <p class="content-label">What I inherited</p>
+      <p>Inman had been covering real estate for decades, a genuine institution in the space. But the brand didn&#8217;t feel like one. It felt techy. The visual language was trying to look like a startup when the editorial product had real authority behind it.</p>
+      <p>The brief I gave myself was simple: make it feel like it&#8217;s always been there.</p>
+    </div>
+
+    <div class="content-section fade-in">
+      <p class="content-label">The direction</p>
+      <p>Classic editorial authority. The design language of a trusted newsroom, sharp, confident, information-dense without becoming cluttered. The kind of publication that doesn&#8217;t need to announce itself because it already knows what it is.</p>
+
+      <div class="before-after">
+        <div class="ba-panel">
+          <p class="ba-label">Before</p>
+          <div class="ba-item"><div class="ba-dot ba-dot-before"></div>Techy, startup-adjacent feel</div>
+          <div class="ba-item"><div class="ba-dot ba-dot-before"></div>Inconsistent across touchpoints</div>
+          <div class="ba-item"><div class="ba-dot ba-dot-before"></div>Soft, indistinct color palette</div>
+          <div class="ba-item"><div class="ba-dot ba-dot-before"></div>No typographic hierarchy</div>
+          <div class="ba-item"><div class="ba-dot ba-dot-before"></div>Dated logo system</div>
+        </div>
+        <div class="ba-panel">
+          <p class="ba-label">After</p>
+          <div class="ba-item"><div class="ba-dot ba-dot-after"></div>Authoritative editorial clarity</div>
+          <div class="ba-item"><div class="ba-dot ba-dot-after"></div>Cohesive across all touchpoints</div>
+          <div class="ba-item"><div class="ba-dot ba-dot-after"></div>Bold, purposeful color system</div>
+          <div class="ba-item"><div class="ba-dot ba-dot-after"></div>Three-font hierarchy with clear roles</div>
+          <div class="ba-item"><div class="ba-dot ba-dot-after"></div>Sharp, institutional identity</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section fade-in">
+      <p class="content-label">The key decisions</p>
+      <ul class="decision-list">
+        <li class="decision-item">
+          <span class="decision-num">01</span>
+          <span class="decision-text"><strong>Deep navy as the anchor</strong> — Inman Dark (#161a48) became the institutional foundation. Every header, footer, and dark surface runs through it. It conveys permanence. It says this publication has been here and will keep being here.</span>
+        </li>
+        <li class="decision-item">
+          <span class="decision-num">02</span>
+          <span class="decision-text"><strong>Three fonts with distinct roles</strong> — HEX Franklin Variable as the workhorse: geometric, authoritative, legible at every size from 11px metadata to 42px headlines. Harriet Display for the literary moments, editorial features, pull quotes, where the brand needs to feel more like a magazine than a feed. Tungsten for events and promotions where you need maximum punch.</span>
+        </li>
+        <li class="decision-item">
+          <span class="decision-num">03</span>
+          <span class="decision-text"><strong>Sharp edges everywhere</strong> — Zero border radius on cards, inputs, and containers. This was a deliberate rejection of the rounded, friendly UI language of tech. Sharp edges feel like a newspaper. That was the point.</span>
+        </li>
+        <li class="decision-item">
+          <span class="decision-num">04</span>
+          <span class="decision-text"><strong>Red as editorial exclamation</strong> — Inman Red (#da3832) used sparingly: breaking news, primary CTAs, urgent alerts. When red appears, it means something. Overuse would kill that.</span>
+        </li>
+        <li class="decision-item">
+          <span class="decision-num">05</span>
+          <span class="decision-text"><strong>Information density without clutter</strong> — The grid and spacing system was designed for scanning, not reading. Real estate professionals read Inman on deadline. The layout needed to reward fast eyes while still holding up for long-form.</span>
+        </li>
+      </ul>
+
+      <div class="callout">
+        <p>&#8220;The old brand felt like it was trying to look new. The new brand is trying to feel permanent.&#8221;</p>
+      </div>
+    </div>
+
+    <div class="content-section fade-in">
+      <p class="content-label">Chapter two — AI enters</p>
+      <p>The brand refresh was done solo. No AI assist, just design decisions made over time, tested against the editorial product, refined until the system felt right.</p>
+      <p>Then three months ago, AI changed how that brand gets used. The creative brief process, the brand standards site, the production workflow, all of that came after the brand existed. The system I&#8217;d built by hand became the thing AI needed to work within.</p>
+
+      <div class="chapter-two">
+        <p class="chapter-two-label">The infrastructure layer</p>
+        <p>The brand standards site built via Claude Code is the living documentation of everything in this case study, color values, typography rules, component patterns, usage guidelines. It&#8217;s not a PDF that gets outdated. It&#8217;s a site that people and agents can reference directly.</p>
+        <p>Alongside the site lives <code style="font-size:0.85em; color: var(--lime); background: rgba(200,241,53,0.1); padding: 2px 6px; border-radius: 3px;">design.md</code> — a machine-readable file that teaches Claude the entire Inman brand system. Not just hex values, but judgment calls: what&#8217;s universal vs. rare, what combinations are approved, how components behave in context. When AI generates anything for Inman now, it works within documented constraints rather than guessing. The brand I built by hand became the ruleset AI works within.</p>
+        <p>That&#8217;s what makes the brand scalable now. Not more headcount. Not more rounds of review. A well-documented system that AI can work within.</p>
+        <p>The full infrastructure story is in <a href="/case-inman">case 01</a>.</p>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<a href="/case-vox" class="next-case">
+  <div>
+    <p class="next-label">Next case study</p>
+    <p class="next-title">Design at scale: the Vox era</p>
+  </div>
+  <div class="next-arrow">→</div>
+</a>
+
+</Layout>

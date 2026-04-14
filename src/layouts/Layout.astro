@@ -1,0 +1,113 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogUrl?: string;
+}
+
+const {
+  title,
+  description = "VP Design at Inman. AI-integrated across brand, product, video, and events.",
+  ogUrl = "https://tedirvine.com",
+} = Astro.props;
+
+const favicon = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+PHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNiIgZmlsbD0iIzEzMEQyNCIvPjxyZWN0IHg9IjciIHk9IjgiIHdpZHRoPSIxOCIgaGVpZ2h0PSIzIiBmaWxsPSIjQzhGMTM1Ii8+PHJlY3QgeD0iMTQiIHk9IjExIiB3aWR0aD0iNCIgaGVpZ2h0PSIxMyIgZmlsbD0iI0M4RjEzNSIvPjwvc3ZnPg==";
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href={favicon}>
+  <meta property="og:type" content="website">
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content="https://tedirvine.com/og-image.png">
+  <meta property="og:url" content={ogUrl}>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content="https://tedirvine.com/og-image.png">
+</head>
+<body>
+  <!-- Accent color must run synchronously before paint -->
+  <script is:inline>
+    const accents = ['#fa8406', '#C8F135', '#06bbf9', '#e31fea'];
+    let pick = sessionStorage.getItem('accentColor');
+    if (!pick) {
+      pick = accents[Math.floor(Math.random() * accents.length)];
+      sessionStorage.setItem('accentColor', pick);
+    }
+    document.documentElement.style.setProperty('--lime', pick);
+  </script>
+
+  <nav>
+    <a href="/" class="nav-name">Ted Irvine</a>
+    <ul class="nav-links">
+      <li><a href="/#work">Work</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="/#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <slot />
+
+  <footer>
+    <span>© 2026 Ted Irvine</span>
+    <span class="footer-coords">40.0379° N, 76.3055° W</span>
+    <a href="https://www.linkedin.com/in/tedirvine/" target="_blank" rel="noopener">LinkedIn</a>
+  </footer>
+
+  <div id="star-cursor">✦</div>
+
+  <script>
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Custom cursor
+    const cursor = document.getElementById('star-cursor')!;
+    let mouseX = 0, mouseY = 0, curX = 0, curY = 0, visible = false;
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      if (!visible) { cursor.style.opacity = '1'; visible = true; }
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursor.style.opacity = '0';
+      visible = false;
+    });
+
+    function animateCursor() {
+      curX += (mouseX - curX) * 0.18;
+      curY += (mouseY - curY) * 0.18;
+      cursor.style.left = curX + 'px';
+      cursor.style.top = curY + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    let rotation = 0;
+    document.addEventListener('click', () => {
+      rotation += 45;
+      cursor.style.transition = 'opacity 0.2s ease, transform 0.3s ease';
+      cursor.style.transform = `translate(-50%, -50%) rotate(${rotation}deg) scale(1.6)`;
+      setTimeout(() => {
+        cursor.style.transform = `translate(-50%, -50%) rotate(${rotation}deg) scale(1)`;
+      }, 300);
+    });
+  </script>
+</body>
+</html>
